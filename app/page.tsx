@@ -49,17 +49,17 @@ export default function HomePage() {
 						onChange={e => setPassword(e.target.value)}
 						required
 					/>
-					<button type="submit" style={{color: "white", background: "#2563eb", fontWeight: 500, padding: "0.5rem", borderRadius: "0.375rem", cursor: "pointer", border: "none", width: "100%"}}>
-						{isLogin ? 'Login' : 'Sign Up'}
+					<button type="submit" style={{color: "white", background: "#2563eb", fontSize: "1.5rem", fontWeight: 500, padding: "0.5rem", borderRadius: "0.375rem", cursor: "pointer", border: "none", width: "100%"}}>
+						{isLogin ? "Login" : "Sign Up"}
 					</button>
 				</form>
-				<p style={{color: "#6b7280", textAlign: "center", fontSize: '0.875rem', marginTop: "0.75rem"}}>
+				<p style={{color: "#6b7280", textAlign: "center", fontSize: '1rem', marginTop: "0.75rem"}}>
 				{isLogin ? "Don't have an account?" : 'Already registered?'}{' '}
-					<button style={{color: "#2563eb", fontWeight: 500, padding: "0.5rem", borderRadius: "0.375rem", cursor: "pointer", border: "none", width: "100%"}} onClick={() => setIsLogin(!isLogin)}>
-						{isLogin ? 'Sign Up' : 'Login'}
+					<button style={{color: "#2563eb", fontSize: "1.25rem", fontWeight: 500, padding: "0.5rem", borderRadius: "0.375rem", cursor: "pointer", border: "none", width: "100%"}} onClick={() => setIsLogin(!isLogin)}>
+						{isLogin ? "Sign Up" : "Login"}
 					</button>
 				</p>
-				{message && <p style={{color: "#dc2626", textAlign: "center", marginTop: "1rem", fontSize: "0.875rem"}}>{message}</p>}
+				{message && <p style={{color: "#dc2626", textAlign: "center", marginTop: "1rem", fontSize: "1rem"}}>{message}</p>}
 			</div>
     	</div>
 	);
