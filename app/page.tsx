@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 
-export default function HomePage() {
+export default function LoginPage() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [isLogin, setIsLogin] = useState(true);
@@ -18,6 +18,7 @@ export default function HomePage() {
 				setMessage(error.message);
 			} else {
 				setMessage('Logged in!');
+				window.location.href = "/home"
 			}
 		} else {
 			const { error } = await supabase.auth.signUp({ email, password });
