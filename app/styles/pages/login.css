@@ -1,0 +1,19 @@
+
+.login-background {
+	background: #323986; /* based on the background image */
+	background-image: url("/images/backgrounds/login.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.login-form {
+	background: var(--muted);
+	border: 1px solid var(--border);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+	border-radius: 1rem;
+	padding: 2rem;
+	width: 100%;
+	max-width: 350px;
+	text-align: center;
+}

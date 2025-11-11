@@ -1,0 +1,41 @@
+
+
+:root {
+	/* colors */
+	--background: #f6f7fb; /* main background color */
+	--foreground: #1c1f26; /* primary text color (titles, body text) - near black for high contrast */
+	--primary: #2e51a2; /* main blue color (main action buttons, links, highlights, topbar background) */
+	--secondary: #435b96; /* darker blue for hover states and secondary buttons (slightly desaturated version of primary) */
+	--accent: #f78c1d; /* orange accent (ratings, active tags, important highlights, icons, notifications) */
+	--muted: #e3e8f2; /* subtle background for cards, tables, containers, and alternate row colors */
+	--border: #d0d7e5; /* light border color for dividers, tables, or card outlines */
+	--success: #3bb273; /* success color (e.g., completed status) */
+	--warning: #f5c542; /* warning color (e.g., on-hold status) */
+	--error: #e15759; /* error color (delete buttons, errors, etc.) */
+	--input-bg: #ffffff; /* input fields background, consistent on both light and muted areas */
+	--input-border: #ccd3e0; /* input borders, slightly darker than background for contrast */
+	/* fonts */
+	--font-family: Verdana, Arial, sans-serif;
+	--font-size: 15px;
+	--muted-font-color: #808080; /* secondary text color */
+}
+
+
+/* Dark theme changes */
+@media (prefers-color-scheme: dark) {
+	:root {
+		/* colors */
+		--background: #222329;
+		--foreground: #e8ecf5;
+		--primary: #4d7cf3;
+		--secondary: #3b5cc8;
+		--accent: #f8a84b;
+		--muted: #1a1d25;
+		--border: #2a2e3a;
+		--input-bg: #1d212b;
+    	--input-border: #323643;
+		--success: #58c991;
+		--warning: #f2cb67;
+		--error: #ff6b6b;
+	}
+}

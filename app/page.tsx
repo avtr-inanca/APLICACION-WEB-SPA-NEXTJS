@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
+import "./styles/pages/login.css"
 
 export default function HomePage() {
 	const [email, setEmail] = useState('');
@@ -30,16 +31,17 @@ export default function HomePage() {
 	}
 	
 	return (
-		<div style={{background: "#202030", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh"}}>
-			<div style={{background: "#f0f0f0", padding: "20px", borderRadius: "10px", width: "300px", textAlign: "center", boxShadow: "0 0 10px rgba(0,0,0,0.1)"}}>
-				<h1 style={{color: "#202020"}}>{isLogin ? 'Login' : 'Sign Up'}</h1>
-				<form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "0.75rem"}}>
+		<main className="login-background min-h-screen flex flex-col items-center justify-center">
+			<div className="login-form">
+				<h1 className="text-2xl font-semibold mb-4" style={{color: "var(--foreground)"}}>
+					{isLogin ? 'Login' : 'Sign Up'}
+				</h1>
+				<form onSubmit={handleSubmit} className="flex flex-col gap-3">
 					<input
 						type="email"
 						placeholder="Email"
 						value={email}
 						onChange={e => setEmail(e.target.value)}
-						style={{border: "rounded"}}
 						required
 					/>
 					<input
@@ -49,18 +51,18 @@ export default function HomePage() {
 						onChange={e => setPassword(e.target.value)}
 						required
 					/>
-					<button type="submit" style={{color: "white", background: "#2563eb", fontSize: "1.5rem", fontWeight: 500, padding: "0.5rem", borderRadius: "0.375rem", cursor: "pointer", border: "none", width: "100%"}}>
+					<button type="submit" className="btn-primary text-lg">
 						{isLogin ? "Login" : "Sign Up"}
 					</button>
 				</form>
-				<p style={{color: "#6b7280", textAlign: "center", fontSize: '1rem', marginTop: "0.75rem"}}>
+				<p className="text-muted text-center text-sm mt-4">
 				{isLogin ? "Don't have an account?" : 'Already registered?'}{' '}
-					<button style={{color: "#2563eb", fontSize: "1.25rem", fontWeight: 500, padding: "0.5rem", borderRadius: "0.375rem", cursor: "pointer", border: "none", width: "100%"}} onClick={() => setIsLogin(!isLogin)}>
+					<button className="btn-secondary mt-2" style={{width: "100%"}} onClick={() => setIsLogin(!isLogin)}>
 						{isLogin ? "Sign Up" : "Login"}
 					</button>
 				</p>
-				{message && <p style={{color: "#dc2626", textAlign: "center", marginTop: "1rem", fontSize: "1rem"}}>{message}</p>}
+				{message && <p className="text-error text-center mt-4 text-sm">{message}</p>}
 			</div>
-    	</div>
+		</main>
 	);
 }
