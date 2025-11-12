@@ -13,8 +13,17 @@ export default function HomePage() {
         color: "white",
         textDecoration: "none",
         borderRadius: "4px"
-      }}>
-        Go to Search
+      }}>Go to Search
+      </Link>
+      <Link href="/panel" style={{
+        display: "inline-block",
+        marginTop: "10px",
+        padding: "8px 16px",
+        backgroundColor: "#0070f3",
+        color: "white",
+        textDecoration: "none",
+        borderRadius: "4px"
+      }}>Go to my panel
       </Link>
     </div>
   );
