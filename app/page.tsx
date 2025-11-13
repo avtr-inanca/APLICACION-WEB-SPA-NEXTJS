@@ -1,31 +1,30 @@
-'use client';
+"use client";
 import { useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import "./styles/pages/login.css"
 
-export default function HomePage() {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [isLogin, setIsLogin] = useState(true);
-	const [message, setMessage] = useState('');
+export default function LoginPage() {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [loginMode, setLoginMode] = useState(true);
+	const [message, setMessage] = useState("");
 
-	async function handleSubmit(e: React.FormEvent) {
-		e.preventDefault();
-		setMessage('');
-
-		if (isLogin) {
-			const { error } = await supabase.auth.signInWithPassword({ email, password });
+	async function handleSubmit(event: React.FormEvent) {
+		event.preventDefault();
+		setMessage("Verifying...");
+		if (loginMode) { // Logging in
+			const {error} = await supabase.auth.signInWithPassword({email, password});
 			if (error) {
 				setMessage(error.message);
 			} else {
 				setMessage('Logged in!');
 			}
-		} else {
-			const { error } = await supabase.auth.signUp({ email, password });
+		} else { // Registering
+			const {error} = await supabase.auth.signUp({email, password});
 			if (error) {
 				setMessage(error.message);
 			} else {
-				setMessage('Check your email to confirm sign up.');
+				setMessage("Check your email to confirm registration");
 			}
 		}
 	}
@@ -34,7 +33,7 @@ export default function HomePage() {
 		<main className="login-background min-h-screen flex flex-col items-center justify-center">
 			<div className="login-form">
 				<h1 className="text-2xl font-semibold mb-4" style={{color: "var(--foreground)"}}>
-					{isLogin ? 'Login' : 'Sign Up'}
+					{loginMode ? "Login" : "Register"}
 				</h1>
 				<form onSubmit={handleSubmit} className="flex flex-col gap-3">
 					<input
@@ -52,16 +51,13 @@ export default function HomePage() {
 						required
 					/>
 					<button type="submit" className="btn-primary text-lg">
-						{isLogin ? "Login" : "Sign Up"}
+						{loginMode ? "Login" : "Register"}
 					</button>
 				</form>
-				<p className="text-muted text-center text-sm mt-4">
-				{isLogin ? "Don't have an account?" : 'Already registered?'}{' '}
-					<button className="btn-secondary mt-2" style={{width: "100%"}} onClick={() => setIsLogin(!isLogin)}>
-						{isLogin ? "Sign Up" : "Login"}
-					</button>
-				</p>
-				{message && <p className="text-error text-center mt-4 text-sm">{message}</p>}
+				<button className="btn-secondary mt-2" style={{width: "100%"}} onClick={() => setLoginMode(!loginMode)}>
+					{loginMode ? "Register" : "Login"}
+				</button>
+				{(message != "") && (<p className="text-error mt-4 text-sm">{message}</p>)}
 			</div>
 		</main>
 	);
