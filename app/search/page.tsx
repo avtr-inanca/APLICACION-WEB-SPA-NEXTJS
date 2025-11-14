@@ -6,6 +6,7 @@ import { useAuth } from "@/app/contexts/AuthContext";
 import { searchAnime, JikanAnime } from "@/lib/jikanApi";
 import { addAnimeToCollection, getAnimeInCollection } from "@/lib/animeCollection";
 import { useRouter } from "next/navigation";
+import ExpandableText from "@/app/components/ExpandableText";
 
 export default function SearchPage() {
 	const [query, setQuery] = useState("");
@@ -96,10 +97,8 @@ export default function SearchPage() {
 				{animes.length > 0 && (
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 						{animes.map((anime) => (
-							<div
-								key={anime.mal_id}
-								className="bg-[var(--muted)] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow border border-[var(--border)]"
-							>
+							<div key={anime.mal_id} className="bg-[var(--muted)] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow border border-[var(--border)] flex flex-col">
+								{/* Image of the anime */}
 								{anime.images.jpg.large_image_url && (
 									<img
 										src={anime.images.jpg.large_image_url}
@@ -107,41 +106,39 @@ export default function SearchPage() {
 										className="w-full h-64 object-cover"
 									/>
 								)}
-								<div className="p-4">
-									<h3 className="font-semibold text-lg mb-2 text-[var(--foreground)] line-clamp-2">
+								{/* Card content */}
+								<div className="p-4 flex flex-col flex-grow">
+									<h3 className="font-semibold text-lg text-[var(--foreground)] line-clamp-2 mb-1">
 										{anime.title}
 									</h3>
-									{anime.score && (
-										<div className="flex items-center gap-2 mb-2">
-											<span className="text-[var(--accent)] font-bold">
-												⭐ {anime.score}
-											</span>
-											{anime.year && (
-												<span className="text-sm text-[var(--muted-font-color)]">
-													• {anime.year}
+									<div className="text-sm text-[var(--muted-font-color)]">
+										{anime.episodes && (
+											<p className="text-sm text-[var(--muted-font-color)]">
+												{t("episodes")}: {anime.episodes}
+											</p>
+										)}
+										{anime.score && (
+											<div className="flex items-center gap-2 mb-3">
+												<span className="text-[var(--accent)] font-bold">
+													⭐ {anime.score}
 												</span>
-											)}
-										</div>
-									)}
-									{anime.episodes && (
-										<p className="text-sm text-[var(--muted-font-color)] mb-3">
-											{t("episodes")}: {anime.episodes}
-										</p>
-									)}
-									{anime.synopsis && (
-										<p className="text-sm text-[var(--foreground)] mb-4 line-clamp-3">
-											{anime.synopsis}
-										</p>
-									)}
-									<button
-										onClick={() => handleAddToCollection(anime)}
-										disabled={addingIds.has(anime.mal_id)}
-										className="btn-primary w-full text-sm disabled:opacity-50"
-									>
-										{addingIds.has(anime.mal_id)
-											? t("loading")
-											: t("addToCollection")}
-									</button>
+											</div>
+										)}
+									</div>
+										{anime.synopsis && (											
+											<ExpandableText text={anime.synopsis}/>
+										)}
+									
+									<div className="mt-auto pt-4">
+										<button className="btn-primary w-full text-sm disabled:opacity-50"
+											onClick={() => handleAddToCollection(anime)}
+											disabled={addingIds.has(anime.mal_id)}
+										>
+											{addingIds.has(anime.mal_id)
+												? t("loading")
+												: t("addToCollection")}
+										</button>
+									</div>
 								</div>
 							</div>
 						))}
