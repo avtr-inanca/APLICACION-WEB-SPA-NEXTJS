@@ -1,5 +1,5 @@
 import { supabase } from "./supabaseClient";
-import { JikanAnime } from "./jikanApi";
+import { JikanAnime } from "../../lib/jikan/jikanApi";
 
 export interface UserAnime {
 	id: string;

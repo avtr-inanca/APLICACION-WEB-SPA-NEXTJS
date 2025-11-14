@@ -3,8 +3,8 @@ import React, { useState, FormEvent } from "react";
 import ProtectedRoute from "@/app/components/ProtectedRoute";
 import { useLanguage } from "@/app/contexts/LanguageContext";
 import { useAuth } from "@/app/contexts/AuthContext";
-import { searchAnime, JikanAnime } from "@/lib/jikanApi";
-import { addAnimeToCollection, getAnimeInCollection } from "@/lib/animeCollection";
+import { searchAnime, JikanAnime } from "@/lib/jikan/jikanApi";
+import { addAnimeToCollection, getAnimeInCollection } from "@/app/api/animeCollection";
 import { useRouter } from "next/navigation";
 import ExpandableText from "@/app/components/ExpandableText";
 

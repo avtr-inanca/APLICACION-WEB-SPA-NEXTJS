@@ -8,7 +8,7 @@ import {
 	updateAnimeInCollection,
 	removeAnimeFromCollection,
 	UserAnime,
-} from "@/lib/animeCollection";
+} from "@/app/api/animeCollection";
 
 export default function PanelPage() {
 	const [collection, setCollection] = useState<UserAnime[]>([]);

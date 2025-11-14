@@ -140,4 +140,3 @@ export async function getAnimeById(id: number): Promise<{ data: JikanAnime }> {
 	}
 	return response.json();
 }
-
