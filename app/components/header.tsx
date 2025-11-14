@@ -11,11 +11,6 @@ export default function Header() {
 	const pathname = usePathname();
 	const router = useRouter();
 
-	// Don't show header on login page
-	if (pathname === "/") {
-		return null;
-	}
-
 	const handleSignOut = async () => {
 		await signOut();
 		router.push("/");
@@ -28,7 +23,7 @@ export default function Header() {
 					My Anime Log
 				</Link>
 				<div className="flex items-center flex-wrap justify-center">
-					{user ? (
+					{user && (
 						<div className="flex gap-2">
 							<Link href="/home" className={`px-3 py-2 rounded-md text-sm font-medium ${
 								pathname === "/home" 
@@ -52,10 +47,6 @@ export default function Header() {
 								{t("panel")}
 							</Link>
 						</div>
-					) : ( // Not logged into the page
-						<a href="/" className="px-3 py-2 rounded-md text-sm font-medium text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors">
-							{t("login")}
-						</a>
 					)}
   					<span className="text-[var(--border)] text-xl mx-2">|</span>
 					<div className="flex items-center gap-2">
@@ -79,11 +70,13 @@ export default function Header() {
 						</button>
 					</div>
   					<span className="text-[var(--border)] text-xl mx-2">|</span>					
-					<div className="flex items-center">
-						<button onClick={handleSignOut} className="logout-button px-3 py-2 rounded font-bold">
-							{t("logout")}
-						</button>
-					</div>
+					{user && (
+						<div className="flex items-center">
+							<button onClick={handleSignOut} className="logout-button px-3 py-2 rounded font-bold">
+								{t("logout")}
+							</button>
+						</div>
+					)}
 				</div>
 			</nav>
 		</header>
