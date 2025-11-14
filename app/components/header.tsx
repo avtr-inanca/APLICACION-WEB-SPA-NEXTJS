@@ -23,7 +23,7 @@ export default function Header() {
 	return (
 		<header className="bg-white dark:bg-[var(--muted)] shadow-md mb-6 sticky top-0 z-50">
 			<nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-				<Link href="/home" className="text-xl font-bold text-[var(--primary)] hover:text-[var(--secondary)] transition-colors">
+				<Link href="/home" className="text-xl font-bold no-underline text-[var(--primary)] hover:text-[var(--secondary)] transition-colors">
 					My Anime Log
 				</Link>
 				<div className="flex items-center gap-4 flex-wrap justify-center">
@@ -31,53 +31,55 @@ export default function Header() {
 						<div>
 							<Link href="/home" className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
 								pathname === "/home" 
-									? "bg-[var(--primary)] text-white" 
-									: "text-[var(--foreground)] hover:bg-[var(--muted)]"
+									? "bg-[var(--primary)] !text-white"
+									: "text-[var(--foreground)] hover:bg-[var(--muted-secondary)]"
 							}`}>
 								{t("home")}
 							</Link>
 							<Link href="/search" className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
 								pathname === "/search" 
-									? "bg-[var(--primary)] text-white" 
-									: "text-[var(--foreground)] hover:bg-[var(--muted)]"
+									? "bg-[var(--primary)] !text-white" 
+									: "text-[var(--foreground)] hover:bg-[var(--muted-secondary)]"
 							}`}>
 								{t("search")}
 							</Link>
 							<Link href="/panel" className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
 								pathname === "/panel" 
-									? "bg-[var(--primary)] text-white" 
-									: "text-[var(--foreground)] hover:bg-[var(--muted)]"
+									? "bg-[var(--primary)] !text-white" 
+									: "text-[var(--foreground)] hover:bg-[var(--muted-secondary)]"
 							}`}>
 								{t("panel")}
 							</Link>
-							<button onClick={handleSignOut} className="px-3 py-2 rounded-md text-sm font-medium text-[var(--error)] hover:bg-[var(--muted)] transition-colors">
-								{t("logout")}
-							</button>
 						</div>
 					) : ( // Not logged into the page
-						<Link href="/" className="px-3 py-2 rounded-md text-sm font-medium text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors">
+						<a href="/" className="px-3 py-2 rounded-md text-sm font-medium text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors">
 							{t("login")}
-						</Link>
+						</a>
 					)}
 					
 					<div className="flex items-center gap-2 border-l border-[var(--border)] pl-4 ml-4">
 						<button
 							onClick={() => setLanguage("en")}
-							className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
+							className={`px-4 py-2 rounded text-m font-medium transition-colors ${
 								language === "en" 
 									? "bg-[var(--primary)] text-white" 
-									: "text-[var(--foreground)] hover:bg-[var(--muted)]"
+									: "text-[var(--foreground)] bg-[var(--muted-secondary)]"
 						}`}>
 							EN
 						</button>
 						<button
 							onClick={() => setLanguage("es")}
-							className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
-								language === "es" 
+							className={`px-4 py-2 rounded text-m font-medium transition-colors ${
+								language === "es"
 									? "bg-[var(--primary)] text-white" 
-									: "text-[var(--foreground)] hover:bg-[var(--muted)]"
+									: "text-[var(--foreground)] bg-[var(--muted-secondary)]"
 						}`}>
 							ES
+						</button>
+					</div>
+					<div className="flex items-center gap-2 border-l border-[var(--border)] pl-4 ml-4">
+						<button onClick={handleSignOut} className="px-3 py-2 rounded-md text-sm font-medium text-[var(--error)] hover:bg-[var(--muted)] transition-colors">
+							{t("logout")}
 						</button>
 					</div>
 				</div>
