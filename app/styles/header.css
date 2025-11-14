@@ -1,0 +1,17 @@
+.logout-button {
+	color: var(--error);
+	transition: all 0.25s ease;
+}
+
+.logout-button:hover {
+	background: color-mix(in srgb, transparent, var(--error) 20%);
+}
+
+.unselected-navigation-button {
+	color: var(--foreground);
+	transition: all 0.25s ease;
+}
+
+.unselected-navigation-button:hover {
+	background: color-mix(in srgb, transparent, var(--primary) 20%);
+}

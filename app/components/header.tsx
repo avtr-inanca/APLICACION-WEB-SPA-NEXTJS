@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/app/contexts/AuthContext";
 import { useLanguage } from "@/app/contexts/LanguageContext";
+import "../styles/header.css";
 
 export default function Header() {
 	const {user, signOut} = useAuth();
@@ -23,30 +24,30 @@ export default function Header() {
 	return (
 		<header className="bg-white dark:bg-[var(--muted)] shadow-md mb-6 sticky top-0 z-50">
 			<nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-				<Link href="/home" className="text-xl font-bold no-underline text-[var(--primary)] hover:text-[var(--secondary)] transition-colors">
+				<Link href="/home" className="text-4xl font-bold text-[var(--primary)]">
 					My Anime Log
 				</Link>
-				<div className="flex items-center gap-4 flex-wrap justify-center">
+				<div className="flex items-center flex-wrap justify-center">
 					{user ? (
-						<div>
-							<Link href="/home" className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+						<div className="flex gap-2">
+							<Link href="/home" className={`px-3 py-2 rounded-md text-sm font-medium ${
 								pathname === "/home" 
 									? "bg-[var(--primary)] !text-white"
-									: "text-[var(--foreground)] hover:bg-[var(--muted-secondary)]"
+									: "unselected-navigation-button"
 							}`}>
 								{t("home")}
 							</Link>
-							<Link href="/search" className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+							<Link href="/search" className={`px-3 py-2 rounded-md text-sm font-medium ${
 								pathname === "/search" 
 									? "bg-[var(--primary)] !text-white" 
-									: "text-[var(--foreground)] hover:bg-[var(--muted-secondary)]"
+									: "unselected-navigation-button"
 							}`}>
 								{t("search")}
 							</Link>
-							<Link href="/panel" className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+							<Link href="/panel" className={`px-3 py-2 rounded-md text-sm font-medium ${
 								pathname === "/panel" 
 									? "bg-[var(--primary)] !text-white" 
-									: "text-[var(--foreground)] hover:bg-[var(--muted-secondary)]"
+									: "unselected-navigation-button"
 							}`}>
 								{t("panel")}
 							</Link>
@@ -56,8 +57,8 @@ export default function Header() {
 							{t("login")}
 						</a>
 					)}
-					
-					<div className="flex items-center gap-2 border-l border-[var(--border)] pl-4 ml-4">
+  					<span className="text-[var(--border)] text-xl mx-2">|</span>
+					<div className="flex items-center gap-2">
 						<button
 							onClick={() => setLanguage("en")}
 							className={`px-4 py-2 rounded text-m font-medium transition-colors ${
@@ -77,8 +78,9 @@ export default function Header() {
 							ES
 						</button>
 					</div>
-					<div className="flex items-center gap-2 border-l border-[var(--border)] pl-4 ml-4">
-						<button onClick={handleSignOut} className="px-3 py-2 rounded-md text-sm font-medium text-[var(--error)] hover:bg-[var(--muted)] transition-colors">
+  					<span className="text-[var(--border)] text-xl mx-2">|</span>					
+					<div className="flex items-center">
+						<button onClick={handleSignOut} className="logout-button px-3 py-2 rounded font-bold">
 							{t("logout")}
 						</button>
 					</div>
