@@ -39,12 +39,12 @@ export default function Header() {
 							}`}>
 								{t("search")}
 							</Link>
-							<Link href="/panel" className={`px-3 py-2 rounded-md text-sm font-medium ${
-								pathname === "/panel" 
+							<Link href="/collection" className={`px-3 py-2 rounded-md text-sm font-medium ${
+								pathname === "/collection" 
 									? "bg-[var(--primary)] !text-white" 
 									: "unselected-navigation-button"
 							}`}>
-								{t("panel")}
+								{t("collection")}
 							</Link>
 						</div>
 					)}

@@ -34,15 +34,15 @@ export default function HomePage() {
 					</Link>
 
 					<Link
-						href="/panel"
+						href="/collection"
 						className="bg-[var(--muted)] rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow border border-[var(--border)] text-center group"
 					>
 						<div className="text-4xl mb-4">📚</div>
 						<h2 className="text-2xl font-semibold mb-2 text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors">
-							{t("panel")}
+							{t("collection")}
 						</h2>
 						<p className="text-[var(--muted-font-color)]">
-							{t("panelDescription")}
+							{t("collectionDescription")}
 						</p>
 					</Link>
 				</div>
