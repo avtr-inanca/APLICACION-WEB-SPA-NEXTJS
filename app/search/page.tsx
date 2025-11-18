@@ -1,6 +1,6 @@
 "use client";
 import { useState, FormEvent } from "react";
-import ProtectedRoute from "@/app/components/ProtectedRoute";
+import ProtectedRoute from "@/app/components/AuthGuardDiv";
 import { useLanguage } from "@/app/contexts/LanguageContext";
 import { useAuthContext } from "@/app/contexts/AuthContext";
 import { searchAnime, JikanAnimeData } from "@/lib/jikan/jikanApi";

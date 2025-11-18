@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import ProtectedRoute from "@/app/components/ProtectedRoute";
+import ProtectedRoute from "@/app/components/AuthGuardDiv";
 import { useLanguage } from "@/app/contexts/LanguageContext";
 
 export default function HomePage() {

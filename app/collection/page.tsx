@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import ProtectedRoute from "@/app/components/ProtectedRoute";
+import ProtectedRoute from "@/app/components/AuthGuardDiv";
 import { useLanguage } from "@/app/contexts/LanguageContext";
 import { useAuthContext } from "@/app/contexts/AuthContext";
 import { SupabaseAnimeData } from "@/lib/supabase/supabaseTypes";

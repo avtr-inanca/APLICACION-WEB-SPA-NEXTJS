@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "Anime Collection App",
+	title: "My Anime Collection",
 	description: "Manage your personal anime collection",
 };
 

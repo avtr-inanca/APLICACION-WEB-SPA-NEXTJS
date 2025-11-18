@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/app/contexts/AuthContext";
 
-export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
+export default function AuthGuardDiv({ children }: { children: React.ReactNode }) {
 	const { user, loading } = useAuthContext();
 	const router = useRouter();
 
@@ -25,6 +25,10 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
 		return null;
 	}
 
-	return <>{children}</>;
+	return (
+		<>
+			{children}
+		</>
+	);
 }
 
