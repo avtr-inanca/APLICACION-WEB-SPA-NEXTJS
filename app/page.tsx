@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "@/app/api/supabaseClient";
-import { useAuth } from "@/app/contexts/AuthContext";
+import { supabaseClient } from "@/lib/supabase/supabaseClient";
+import { useAuthContext } from "@/app/contexts/AuthContext";
 import { useLanguage } from "@/app/contexts/LanguageContext";
 import "./styles/pages/login.css";
 
@@ -11,7 +11,7 @@ export default function LoginPage() {
 	const [password, setPassword] = useState("");
 	const [loginMode, setLoginMode] = useState(true);
 	const [message, setMessage] = useState("");
-	const { user } = useAuth();
+	const { user } = useAuthContext();
 	const { t } = useLanguage();
 	const router = useRouter();
 
@@ -25,7 +25,7 @@ export default function LoginPage() {
 		event.preventDefault();
 		setMessage(t("verifying"));
 		if (loginMode) {
-			const { error } = await supabase.auth.signInWithPassword({ email, password });
+			const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
 			if (error) {
 				setMessage(error.message);
 			} else {
@@ -33,7 +33,7 @@ export default function LoginPage() {
 				router.push("/home");
 			}
 		} else {
-			const { error } = await supabase.auth.signUp({ email, password });
+			const { error } = await supabaseClient.auth.signUp({ email, password });
 			if (error) {
 				setMessage(error.message);
 			} else {

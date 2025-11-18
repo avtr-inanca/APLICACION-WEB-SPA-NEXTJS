@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useAuth } from "@/app/contexts/AuthContext";
+import { useAuthContext } from "@/app/contexts/AuthContext";
 import { useLanguage } from "@/app/contexts/LanguageContext";
 import "../styles/header.css";
 
 export default function Header() {
-	const {user, signOut} = useAuth();
+	const {user, signOut} = useAuthContext();
 	const {language, setLanguage, t} = useLanguage();
 	const pathname = usePathname();
 	const router = useRouter();

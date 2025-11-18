@@ -1,4 +1,4 @@
-export interface JikanAnime {
+export interface JikanAnimeData {
 	mal_id: number;
 	url: string;
 	images: {
@@ -122,7 +122,7 @@ export interface JikanResponse {
 			per_page: number;
 		};
 	};
-	data: JikanAnime[];
+	data: JikanAnimeData[];
 }
 
 export async function searchAnime(query: string): Promise<JikanResponse> {
@@ -133,7 +133,7 @@ export async function searchAnime(query: string): Promise<JikanResponse> {
 	return response.json();
 }
 
-export async function getAnimeById(id: number): Promise<{ data: JikanAnime }> {
+export async function getAnimeById(id: number): Promise<{ data: JikanAnimeData }> {
 	const response = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
 	if (!response.ok) {
 		throw new Error("Failed to fetch anime data");

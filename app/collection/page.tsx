@@ -1,27 +1,23 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ProtectedRoute from "@/app/components/ProtectedRoute";
 import { useLanguage } from "@/app/contexts/LanguageContext";
-import { useAuth } from "@/app/contexts/AuthContext";
-import {
-	getUserAnimeCollection,
-	updateAnimeInCollection,
-	removeAnimeFromCollection,
-	UserAnime,
-} from "@/app/api/animeCollection";
+import { useAuthContext } from "@/app/contexts/AuthContext";
+import { SupabaseAnimeData } from "@/lib/supabase/supabaseTypes";
+import { supabaseClient } from "@/lib/supabase/supabaseClient";
 
-export default function PanelPage() {
-	const [collection, setCollection] = useState<UserAnime[]>([]);
+export default function CollectionPage() {
+	const [collection, setCollection] = useState<SupabaseAnimeData[]>([]);
 	const [loading, setLoading] = useState(true);
-	const [filter, setFilter] = useState<UserAnime["status"] | "all">("all");
+	const [filter, setFilter] = useState<SupabaseAnimeData["status"] | "all">("all");
 	const [editingId, setEditingId] = useState<string | null>(null);
 	const [editData, setEditData] = useState<{
 		episodes_watched: number;
-		status: UserAnime["status"];
+		status: SupabaseAnimeData["status"];
 		rating: number | null;
 	} | null>(null);
 	const { t } = useLanguage();
-	const { user } = useAuth();
+	const { user } = useAuthContext();
 
 	useEffect(() => {
 		if (user) {
@@ -29,14 +25,36 @@ export default function PanelPage() {
 		}
 	}, [user]);
 
+	async function getAccessToken() {
+		const { data } = await supabaseClient.auth.getSession();
+		return data.session?.access_token ?? null;
+	}
+
+	async function authorizedFetch(input: RequestInfo, init?: RequestInit) {
+		const token = await getAccessToken();
+		if (!token) {
+			throw new Error("Missing auth token");
+		}
+		const headers = new Headers(init?.headers);
+		headers.set("Authorization", `Bearer ${token}`);
+		return fetch(input, {
+			...init,
+			headers,
+		});
+	}
+
 	async function loadCollection() {
 		if (!user) return;
 		try {
 			setLoading(true);
-			const data = await getUserAnimeCollection(user.id);
+			const res = await authorizedFetch("/api/collection");
+			if (!res.ok) {
+				throw new Error("Failed to load collection");
+			}
+			const data = await res.json();
 			setCollection(data);
-		} catch (err) {
-			console.error("Failed to load collection:", err);
+		} catch (error) {
+			console.error("Failed to load collection: ", error);
 		} finally {
 			setLoading(false);
 		}
@@ -45,22 +63,33 @@ export default function PanelPage() {
 	async function handleUpdate(id: string) {
 		if (!editData) return;
 		try {
-			await updateAnimeInCollection(id, editData);
+			const response = await authorizedFetch(`/api/collection/${id}`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(editData),
+			});
+			if (!response.ok) {
+				throw new Error("Failed to update");
+			}
 			await loadCollection();
 			setEditingId(null);
-			setEditData(null);
-		} catch (err) {
-			console.error("Failed to update:", err);
+		} catch (error) {
+			console.error("Failed to update:", error);
 			alert(t("failedToUpdate"));
 		}
 	}
 
 	async function handleRemove(id: string) {
-		if (!confirm(t("confirmRemove"))) {
-			return;
-		}
+		if (!confirm(t("confirmRemove"))) return;
 		try {
-			await removeAnimeFromCollection(id);
+			const response = await authorizedFetch(`/api/collection/${id}`, {
+				method: "DELETE",
+			});
+			if (!response.ok) {
+				throw new Error("Failed to remove");
+			}
 			await loadCollection();
 		} catch (err) {
 			console.error("Failed to remove:", err);
@@ -68,7 +97,7 @@ export default function PanelPage() {
 		}
 	}
 
-	function startEdit(item: UserAnime) {
+	function startEdit(item: SupabaseAnimeData) {
 		setEditingId(item.id);
 		setEditData({
 			episodes_watched: item.episodes_watched,
@@ -77,12 +106,13 @@ export default function PanelPage() {
 		});
 	}
 
-	const filteredCollection =
-		filter === "all"
+	const filteredCollection = (
+		(filter === "all")
 			? collection
-			: collection.filter((item) => item.status === filter);
+			: collection.filter((item) => item.status === filter)
+	);
 
-	const statusOptions: Array<{ value: UserAnime["status"]; label: string }> = [
+	const statusOptions: Array<{ value: SupabaseAnimeData["status"]; label: string }> = [
 		{ value: "watching", label: t("currentlyWatching") },
 		{ value: "completed", label: t("completed") },
 		{ value: "on_hold", label: t("onHold") },
@@ -164,7 +194,7 @@ export default function PanelPage() {
 													onChange={(e) =>
 														setEditData({
 															...editData,
-															status: e.target.value as UserAnime["status"],
+															status: e.target.value as SupabaseAnimeData["status"],
 														})
 													}
 													className="w-full px-3 py-2 rounded-lg border border-[var(--input-border)] bg-[var(--input-bg)] text-[var(--foreground)]"

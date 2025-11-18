@@ -26,8 +26,8 @@ Then open  [http://localhost:3000](http://localhost:3000) (or one of the other i
 
 ```
 ├── app/                # App Router pages, layouts, and routes
-|    ├── components/    # Reusable UI components
-|    └── lib/           # Utility functions and modules
+|    └── components/    # Reusable UI components
+├── lib/           # Utility functions and modules
 ├── public/             # Static assets
 ├── next.config.js      # Next.js configuration
 ├── package.json        # Project dependencies and scripts

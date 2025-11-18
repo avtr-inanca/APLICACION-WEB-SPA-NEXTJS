@@ -1,21 +1,21 @@
 "use client";
-import React, { useState, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import ProtectedRoute from "@/app/components/ProtectedRoute";
 import { useLanguage } from "@/app/contexts/LanguageContext";
-import { useAuth } from "@/app/contexts/AuthContext";
-import { searchAnime, JikanAnime } from "@/lib/jikan/jikanApi";
-import { addAnimeToCollection, getAnimeInCollection } from "@/app/api/animeCollection";
+import { useAuthContext } from "@/app/contexts/AuthContext";
+import { searchAnime, JikanAnimeData } from "@/lib/jikan/jikanApi";
+import { supabaseCollectionService } from "@/lib/supabase/supabaseCollectionService";
 import { useRouter } from "next/navigation";
 import ExpandableText from "@/app/components/ExpandableText";
 
 export default function SearchPage() {
 	const [query, setQuery] = useState("");
-	const [animes, setAnimes] = useState<JikanAnime[]>([]);
+	const [animes, setAnimes] = useState<JikanAnimeData[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const [addingIds, setAddingIds] = useState<Set<number>>(new Set());
 	const { t } = useLanguage();
-	const { user } = useAuth();
+	const { user } = useAuthContext();
 	const router = useRouter();
 
 	async function handleSearch(e: FormEvent) {
@@ -35,20 +35,19 @@ export default function SearchPage() {
 		}
 	}
 
-	async function handleAddToCollection(anime: JikanAnime) {
+	async function handleAddToCollection(anime: JikanAnimeData) {
 		if (!user) {
 			router.push("/");
 			return;
 		}
-
 		setAddingIds(prev => new Set(prev).add(anime.mal_id));
 		try {
-			const existing = await getAnimeInCollection(user.id, anime.mal_id);
+			const existing = await supabaseCollectionService.getAnime(user.id, anime.mal_id);
 			if (existing) {
 				alert(t("alreadyInCollection"));
 				return;
 			}
-			await addAnimeToCollection(user.id, anime, "plan_to_watch");
+			await supabaseCollectionService.addAnime(user.id, anime, "plan_to_watch");
 			alert(t("addedToCollection"));
 		} catch (err) {
 			console.error(err);
