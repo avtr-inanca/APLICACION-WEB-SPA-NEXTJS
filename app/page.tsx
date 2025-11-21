@@ -23,13 +23,13 @@ export default function LoginPage() {
 
 	async function handleSubmit(event: React.FormEvent) {
 		event.preventDefault();
-		setMessage(t("verifying"));
+		setMessage(t("verifying..."));
 		if (loginMode) {
 			const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
 			if (error) {
 				setMessage(error.message);
 			} else {
-				setMessage(t("loggedIn"));
+				setMessage(t("Logged in!"));
 				router.push("/home");
 			}
 		} else {
@@ -37,7 +37,7 @@ export default function LoginPage() {
 			if (error) {
 				setMessage(error.message);
 			} else {
-				setMessage(t("checkEmail"));
+				setMessage(t("Check email to confirm registration"));
 			}
 		}
 	}
@@ -46,7 +46,7 @@ export default function LoginPage() {
 		<main className="login-background fixed inset-0 flex flex-col items-center justify-center overflow-hidden">
 			<div className="login-form">
 				<h1 className="text-2xl font-semibold mb-4 text-[var(--foreground)]">
-					{loginMode ? t("login") : t("register")}
+					{loginMode ? t("LOGIN") : t("REGISTER")}
 				</h1>
 				<form onSubmit={handleSubmit} className="flex flex-col gap-3">
 					<input
@@ -66,14 +66,14 @@ export default function LoginPage() {
 						className="w-full"
 					/>
 					<button type="submit" className="btn-primary text-lg w-full">
-						{loginMode ? t("login") : t("register")}
+						{loginMode ? t("Log in") : t("Register")}
 					</button>
 				</form>
 				<button 
 					className="btn-secondary mt-2 w-full" 
 					onClick={() => setLoginMode(!loginMode)}
 				>
-					{loginMode ? t("register") : t("login")}
+					{loginMode ? t("Don't have an account?") : t("Already have an account?")}
 				</button>
 				{message !== "" && (
 					<p className="text-error mt-4 text-sm text-center">{message}</p>

@@ -77,23 +77,23 @@ export default function CollectionPage() {
 			setEditingId(null);
 		} catch (error) {
 			console.error("Failed to update:", error);
-			alert(t("failedToUpdate"));
+			alert(t("Failed to update anime"));
 		}
 	}
 
 	async function handleRemove(id: string) {
-		if (!confirm(t("confirmRemove"))) return;
+		if (!confirm(t("Are you sure you want to remove this anime from your collection?"))) return;
 		try {
 			const response = await authorizedFetch(`/api/collection/${id}`, {
 				method: "DELETE",
 			});
 			if (!response.ok) {
-				throw new Error("Failed to remove");
+				throw new Error("Failed to remove anime from the user's collection");
 			}
 			await loadCollection();
-		} catch (err) {
-			console.error("Failed to remove:", err);
-			alert(t("failedToRemove"));
+		} catch (error) {
+			console.error("Failed to remove anime from the user's collection: ", error);
+			alert(t("Anime couldn't be removed"));
 		}
 	}
 
@@ -113,18 +113,18 @@ export default function CollectionPage() {
 	);
 
 	const statusOptions: Array<{ value: SupabaseAnimeData["status"]; label: string }> = [
-		{ value: "watching", label: t("currentlyWatching") },
-		{ value: "completed", label: t("completed") },
-		{ value: "on_hold", label: t("onHold") },
-		{ value: "dropped", label: t("dropped") },
-		{ value: "plan_to_watch", label: t("watchLater") },
+		{ value: "watching", label: t("Currently Watching") },
+		{ value: "completed", label: t("Completed") },
+		{ value: "on_hold", label: t("On Hold") },
+		{ value: "dropped", label: t("Dropped") },
+		{ value: "plan_to_watch", label: t("Watch Later") },
 	];
 
 	return (
 		<ProtectedRoute>
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
 				<h1 className="text-3xl font-bold mb-6 text-[var(--foreground)]">
-					{t("myCollection")}
+					{t("My Collection")}
 				</h1>
 
 				{/* Filter buttons */}
@@ -137,7 +137,7 @@ export default function CollectionPage() {
 								: "bg-[var(--muted)] text-[var(--foreground)] hover:bg-[var(--border)]"
 						}`}
 					>
-						{t("all")}
+						{t("All")}
 					</button>
 					{statusOptions.map((option) => (
 						<button
@@ -156,13 +156,13 @@ export default function CollectionPage() {
 
 				{loading ? (
 					<div className="text-center py-12 text-[var(--muted-font-color)]">
-						{t("loading")}
+						{t("Loading...")}
 					</div>
 				) : filteredCollection.length === 0 ? (
 					<div className="text-center py-12 text-[var(--muted-font-color)]">
 						{collection.length === 0
-							? t("emptyCollection")
-							: t("noResultsFilter")}
+							? t("Your collection is empty. Start by searching for anime!")
+							: t("No anime found with this filter.")}
 					</div>
 				) : (
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -187,7 +187,7 @@ export default function CollectionPage() {
 										<div className="space-y-3">
 											<div>
 												<label className="block text-sm font-medium text-[var(--foreground)] mb-1">
-													{t("status")}
+													{t("Status")}
 												</label>
 												<select
 													value={editData.status}
@@ -208,7 +208,7 @@ export default function CollectionPage() {
 											</div>
 											<div>
 												<label className="block text-sm font-medium text-[var(--foreground)] mb-1">
-													{t("episodes")} {t("watched")}
+													{t("Episodes")} {t("Watched")}
 												</label>
 												<input
 													type="number"
@@ -231,7 +231,7 @@ export default function CollectionPage() {
 											</div>
 											<div>
 												<label className="block text-sm font-medium text-[var(--foreground)] mb-1">
-													{t("rating")} (1-10)
+													{t("Rating")} (1-10)
 												</label>
 												<input
 													type="number"
@@ -252,7 +252,7 @@ export default function CollectionPage() {
 													onClick={() => handleUpdate(item.id)}
 													className="btn-primary flex-1 text-sm"
 												>
-													{t("save")}
+													{t("Save")}
 												</button>
 												<button
 													onClick={() => {
@@ -261,7 +261,7 @@ export default function CollectionPage() {
 													}}
 													className="btn-secondary flex-1 text-sm"
 												>
-													{t("cancel")}
+													{t("Cancel")}
 												</button>
 											</div>
 										</div>
@@ -270,7 +270,7 @@ export default function CollectionPage() {
 											<div className="mb-3 space-y-2">
 												<div className="flex items-center justify-between">
 													<span className="text-sm text-[var(--muted-font-color)]">
-														{t("status")}:
+														{t("Status")}:
 													</span>
 													<span className="text-sm font-medium text-[var(--foreground)]">
 														{statusOptions.find((opt) => opt.value === item.status)?.label ||
@@ -279,7 +279,7 @@ export default function CollectionPage() {
 												</div>
 												<div className="flex items-center justify-between">
 													<span className="text-sm text-[var(--muted-font-color)]">
-														{t("episodes")} {t("watched")}:
+														{t("Episodes")} {t("Watched")}:
 													</span>
 													<span className="text-sm font-medium text-[var(--foreground)]">
 														{item.episodes_watched}
@@ -290,7 +290,7 @@ export default function CollectionPage() {
 												{item.rating && (
 													<div className="flex items-center justify-between">
 														<span className="text-sm text-[var(--muted-font-color)]">
-															{t("rating")}:
+															{t("Rating")}:
 														</span>
 														<span className="text-sm font-medium text-[var(--accent)]">
 															⭐ {item.rating}/10
@@ -303,13 +303,13 @@ export default function CollectionPage() {
 													onClick={() => startEdit(item)}
 													className="btn-primary flex-1 text-sm"
 												>
-													{t("trackEpisodes")}
+													{t("Edit entry")}
 												</button>
 												<button
 													onClick={() => handleRemove(item.id)}
 													className="px-3 py-2 rounded-lg text-sm font-medium bg-[var(--error)]/10 text-[var(--error)] hover:bg-[var(--error)]/20 transition-colors"
 												>
-													{t("remove")}
+													{t("Remove")}
 												</button>
 											</div>
 										</>

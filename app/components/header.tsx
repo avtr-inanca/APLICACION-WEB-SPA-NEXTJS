@@ -30,21 +30,21 @@ export default function Header() {
 									? "bg-[var(--primary)] !text-white"
 									: "unselected-navigation-button"
 							}`}>
-								{t("home")}
+								{t("Home")}
 							</Link>
 							<Link href="/search" className={`px-3 py-2 rounded-md text-sm font-medium ${
 								pathname === "/search" 
 									? "bg-[var(--primary)] !text-white" 
 									: "unselected-navigation-button"
 							}`}>
-								{t("search")}
+								{t("Search")}
 							</Link>
 							<Link href="/collection" className={`px-3 py-2 rounded-md text-sm font-medium ${
 								pathname === "/collection" 
 									? "bg-[var(--primary)] !text-white" 
 									: "unselected-navigation-button"
 							}`}>
-								{t("collection")}
+								{t("My Collection")}
 							</Link>
 						</div>
 					)}
@@ -73,7 +73,7 @@ export default function Header() {
 					{user && (
 						<div className="flex items-center">
 							<button onClick={handleSignOut} className="logout-button px-3 py-2 rounded font-bold">
-								{t("logout")}
+								{t("Logout")}
 							</button>
 						</div>
 					)}

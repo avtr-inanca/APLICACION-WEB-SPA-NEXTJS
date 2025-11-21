@@ -21,14 +21,13 @@ export default function SearchPage() {
 	async function handleSearch(e: FormEvent) {
 		e.preventDefault();
 		if (!query.trim()) return;
-
 		setLoading(true);
 		setError(null);
 		try {
 			const response = await searchAnime(query);
 			setAnimes(response.data);
 		} catch (err) {
-			setError(t("searchError"));
+			setError(t("Search failed. Please try again."));
 			console.error(err);
 		} finally {
 			setLoading(false);
@@ -44,14 +43,14 @@ export default function SearchPage() {
 		try {
 			const existing = await supabaseCollectionService.getAnime(user.id, anime.mal_id);
 			if (existing) {
-				alert(t("alreadyInCollection"));
+				alert(t("This anime is already in your collection!"));
 				return;
 			}
 			await supabaseCollectionService.addAnime(user.id, anime, "plan_to_watch");
-			alert(t("addedToCollection"));
+			alert(t("Anime added to your collection!"));
 		} catch (err) {
 			console.error(err);
-			alert(t("failedToAdd"));
+			alert(t("Failed to add anime to your collection"));
 		} finally {
 			setAddingIds(prev => {
 				const newSet = new Set(prev);
@@ -65,7 +64,7 @@ export default function SearchPage() {
 		<ProtectedRoute>
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
 				<h1 className="text-3xl font-bold mb-6 text-[var(--foreground)]">
-					{t("searchAnime")}
+					{t("Search Anime")}
 				</h1>
 
 				<form onSubmit={handleSearch} className="mb-8">
@@ -74,7 +73,7 @@ export default function SearchPage() {
 							type="text"
 							value={query}
 							onChange={(e) => setQuery(e.target.value)}
-							placeholder={t("enterAnimeName")}
+							placeholder={t("Enter anime name...")}
 							className="flex-1 px-4 py-2 rounded-lg border border-[var(--input-border)] bg-[var(--input-bg)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
 						/>
 						<button
@@ -82,7 +81,7 @@ export default function SearchPage() {
 							disabled={loading}
 							className="btn-primary px-6 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
 						>
-							{loading ? t("loading") : t("search")}
+							{t("Search")}
 						</button>
 					</div>
 				</form>
@@ -113,7 +112,7 @@ export default function SearchPage() {
 									<div className="text-sm text-[var(--muted-font-color)]">
 										{anime.episodes && (
 											<p className="text-sm text-[var(--muted-font-color)]">
-												{t("episodes")}: {anime.episodes}
+												{t("Episodes")}: {anime.episodes}
 											</p>
 										)}
 										{anime.score && (
@@ -134,8 +133,8 @@ export default function SearchPage() {
 											disabled={addingIds.has(anime.mal_id)}
 										>
 											{addingIds.has(anime.mal_id)
-												? t("loading")
-												: t("addToCollection")}
+												? t("Loading...")
+												: t("Add to Collection")}
 										</button>
 									</div>
 								</div>
@@ -146,7 +145,7 @@ export default function SearchPage() {
 
 				{!loading && animes.length === 0 && query && !error && (
 					<div className="text-center py-12 text-[var(--muted-font-color)]">
-						{t("noResults")}
+						{t("No results found")}
 					</div>
 				)}
 			</div>

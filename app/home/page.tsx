@@ -12,10 +12,10 @@ export default function HomePage() {
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
 				<div className="text-center mb-12">
 					<h1 className="text-4xl font-bold mb-4 text-[var(--foreground)]">
-						{t("home")}
+						{t("Home")}
 					</h1>
 					<p className="text-lg text-[var(--muted-font-color)] mb-8">
-						{t("welcomeMessage")}
+						{t("Welcome back!")}
 					</p>
 				</div>
 
@@ -26,10 +26,10 @@ export default function HomePage() {
 					>
 						<div className="text-4xl mb-4">🔍</div>
 						<h2 className="text-2xl font-semibold mb-2 text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors">
-							{t("search")}
+							{t("Search")}
 						</h2>
 						<p className="text-[var(--muted-font-color)]">
-							{t("searchDescription")}
+							{t("Search animes to add to your collection")}
 						</p>
 					</Link>
 
@@ -39,10 +39,10 @@ export default function HomePage() {
 					>
 						<div className="text-4xl mb-4">📚</div>
 						<h2 className="text-2xl font-semibold mb-2 text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors">
-							{t("collection")}
+							{t("Collection")}
 						</h2>
 						<p className="text-[var(--muted-font-color)]">
-							{t("collectionDescription")}
+							{t("Manage your personal anime collection")}
 						</p>
 					</Link>
 				</div>
