@@ -51,7 +51,7 @@ export default function LoginPage() {
 				<form onSubmit={handleSubmit} className="flex flex-col gap-3">
 					<input
 						type="email"
-						placeholder={t("email")}
+						placeholder={t("Email")}
 						value={email}
 						onChange={e => setEmail(e.target.value)}
 						required
@@ -59,7 +59,7 @@ export default function LoginPage() {
 					/>
 					<input
 						type="password"
-						placeholder={t("password")}
+						placeholder={t("Password")}
 						value={password}
 						onChange={e => setPassword(e.target.value)}
 						required
