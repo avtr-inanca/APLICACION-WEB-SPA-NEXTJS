@@ -44,6 +44,24 @@ Then open  [http://localhost:3000](http://localhost:3000) (or one of the other i
 | `npm start`      | Start the production server                |
 | `npm run lint`   | Run ESLint to check for code issues        |
 
+# Use cases
+
+## First time login
+
+1. Open localhost:3000 on your web browser
+2. Switch to registration mode
+3. Register with a new mail and password
+4. Open personal mail box and validate password
+5. Go back to localhost:3000
+6. Login with newly registered credentials.
+
+## Adding animes to the collection
+
+1. Login into the page
+2. Go to search
+3. Search for an anime (e.g. "Gundam")
+4. Click on "Add to Collection" to add the anime to your personal collection
+
 # Postman setup
 
 This project includes several Postman collections to help test the API easily:
