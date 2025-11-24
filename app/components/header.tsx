@@ -46,6 +46,13 @@ export default function Header() {
 							}`}>
 								{t("My Collection")}
 							</Link>
+							<Link href="/panel" className={`px-3 py-2 rounded-md text-sm font-medium ${
+								pathname === "/panel"
+									? "bg-[var(--primary)] !text-white"
+									: "unselected-navigation-button"
+							}`}>
+								{t("User Panel")}
+							</Link>
 						</div>
 					)}
   					<span className="text-[var(--border)] text-xl mx-2">|</span>
