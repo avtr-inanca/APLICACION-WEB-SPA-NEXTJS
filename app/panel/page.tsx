@@ -95,6 +95,12 @@ export default function UserPanelPage() {
 								{user?.last_sign_in_at ? new Date(user.last_sign_in_at).toLocaleString() : t("Unavailable")}
 							</dd>
 						</div>
+						<div>
+							<dt className="text-sm text-[var(--muted-font-color)]">{t("Display name")}</dt>
+							<dd className="text-lg text-[var(--foreground)]">
+								{user?.user_metadata?.displayName ?? t("Unavailable")}
+							</dd>
+						</div>
 					</dl>
 				</section>
 
