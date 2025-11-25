@@ -3,11 +3,11 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 import i18n from "i18next";
 import { initReactI18next, useTranslation } from "react-i18next";
 
-type Language = "en" | "es";
+type SupportedLanguage = "en" | "es";
 
 const LanguageContext = createContext<{
-	language: Language;
-	setLanguage: (lang: Language) => void;
+	currentLanguage: SupportedLanguage;
+	changeLanguage: (newLanguage: SupportedLanguage) => void;
 	t: (key: string) => string;
 } | null>(null);
 
@@ -17,47 +17,44 @@ if (!i18n.isInitialized) {
 		lng: "en",
 		fallbackLng: "en",
 		interpolation: { escapeValue: false },
-		resources: {} // Empty; translations loaded dynamically
+		resources: {}
 	});
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-	const [language, setLanguage] = useState<Language>("en");
-
+  	const [currentLanguage, setCurrentLanguage] = useState<SupportedLanguage>("en");
 	const { t } = useTranslation();
-
 	// Load translation files dynamically when language changes
 	useEffect(() => {
-		async function loadTranslations() {
-			const data = await fetch(`/lang/${language}/common.json`).then(res => res.json());
-			i18n.addResources(language, "translation", data);
-			i18n.changeLanguage(language);
+		async function loadTranslationFile() {
+			try {
+				const translationData = await fetch(`/lang/${currentLanguage}/common.json`).then(res => res.json());
+				i18n.addResources(currentLanguage, "translation", translationData);
+				i18n.changeLanguage(currentLanguage);
+			} catch (error) {
+				console.error("Error loading translations: ", error);
+			}
 		}
-		loadTranslations();
-	}, [language]);
-
+		loadTranslationFile();
+	}, [currentLanguage]);
 	// Load saved language
 	useEffect(() => {
-		const saved = localStorage.getItem("language") as Language | null;
-		if (saved === "en" || saved === "es") {
-			setLanguage(saved);
-		}
+		const savedLanguage = localStorage.getItem("language") as SupportedLanguage | null;
+		if (savedLanguage === "en" || savedLanguage === "es") setCurrentLanguage(savedLanguage);
 	}, []);
-
-	const handleSetLanguage = (lang: Language) => {
-		setLanguage(lang);
-		localStorage.setItem("language", lang);
+	const changeLanguage = (newLanguage: SupportedLanguage) => {
+		setCurrentLanguage(newLanguage);
+		localStorage.setItem("language", newLanguage);
 	};
-
 	return (
-		<LanguageContext.Provider value={{language, setLanguage: handleSetLanguage, t}}>
+		<LanguageContext.Provider value={{currentLanguage, changeLanguage, t}}>
 			{children}
 		</LanguageContext.Provider>
 	);
 }
 
 export function useLanguage() {
-	const ctx = useContext(LanguageContext);
-	if (!ctx) throw new Error("useLanguage must be used within LanguageProvider");
-	return ctx;
+	const context = useContext(LanguageContext);
+	if (!context) throw new Error("useLanguage must be used within LanguageProvider");
+	return context;
 }
