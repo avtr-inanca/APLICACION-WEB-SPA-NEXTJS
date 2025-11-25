@@ -93,6 +93,22 @@ Go to Environments → Add New Environment
 1. Set a search_query (e.g. Bleach)
 2. Run the request
 
+# Docker
+
+This project can be fully executed inside a Docker container.
+
+## Building the docker image
+
+```
+docker build -t my-anime-log .
+```
+
+## Running the container
+
+```
+docker run -p 3000:3000 my-anime-log
+```
+
 # Resources & Links
 
 - [Next.js Documentation](https://nextjs.org/docs)
