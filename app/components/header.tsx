@@ -7,7 +7,7 @@ import "../styles/header.css";
 
 export default function Header() {
 	const {user, signOut} = useAuthContext();
-	const {language, setLanguage, t} = useLanguage();
+	const {currentLanguage, changeLanguage, t} = useLanguage();
 	const pathname = usePathname();
 	const router = useRouter();
 
@@ -58,18 +58,18 @@ export default function Header() {
   					<span className="text-[var(--border)] text-xl mx-2">|</span>
 					<div className="flex items-center gap-2">
 						<button
-							onClick={() => setLanguage("en")}
+							onClick={() => changeLanguage("en")}
 							className={`px-4 py-2 rounded text-m font-medium transition-colors ${
-								language === "en" 
+								currentLanguage === "en" 
 									? "bg-[var(--primary)] text-white" 
 									: "text-[var(--foreground)] bg-[var(--muted-secondary)]"
 						}`}>
 							EN
 						</button>
 						<button
-							onClick={() => setLanguage("es")}
+							onClick={() => changeLanguage("es")}
 							className={`px-4 py-2 rounded text-m font-medium transition-colors ${
-								language === "es"
+								currentLanguage === "es"
 									? "bg-[var(--primary)] text-white" 
 									: "text-[var(--foreground)] bg-[var(--muted-secondary)]"
 						}`}>

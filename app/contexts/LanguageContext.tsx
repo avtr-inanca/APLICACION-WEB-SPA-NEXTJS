@@ -1,52 +1,53 @@
 "use client";
-import { createContext, useContext, useState, ReactNode, useEffect, useCallback, useRef } from "react";
-import { translateText } from "@/lib/translate/googleTranslate";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import i18n from "i18next";
+import { initReactI18next, useTranslation } from "react-i18next";
 
-type Language = "en" | "es";
+type SupportedLanguage = "en" | "es";
 
-interface LanguageContextType {
-	language: Language;
-	setLanguage: (lang: Language) => void;
+const LanguageContext = createContext<{
+	currentLanguage: SupportedLanguage;
+	changeLanguage: (newLanguage: SupportedLanguage) => void;
 	t: (key: string) => string;
+} | null>(null);
+
+// Initialize i18next once
+if (!i18n.isInitialized) {
+	i18n.use(initReactI18next).init({
+		lng: "en",
+		fallbackLng: "en",
+		interpolation: { escapeValue: false },
+		resources: {}
+	});
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
-
-export function LanguageProvider({children}: { children: ReactNode }) {
-	const [language, setLanguage] = useState<Language>("en");
-	// Local cache of the context, in case react re-renderizes the component.	
-	const [translations, setTranslations] = useState<Record<string, string>>({});
-	// Usage of languageRef in case user changes language while translation is in progress.
-	const languageRef = useRef(language);
-	// Update languageRef when language changes
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  	const [currentLanguage, setCurrentLanguage] = useState<SupportedLanguage>("en");
+	const { t } = useTranslation();
+	// Load translation files dynamically when language changes
 	useEffect(() => {
-		languageRef.current = language;
-	}, [language]);
-	const handleSetLanguage = (lang: Language) => {
-		setLanguage(lang);
-		localStorage.setItem("language", lang);
-	};
-	const t = useCallback((text: string): string => {
-		// If language is English, return text without changes
-		if (language === "en") {
-			return text;
-		}
-		// Use available translation if possible.
-		if (translations[text]) {
-			return translations[text];
-		}
-		// If not translated yet, then start async translation
-		translateText(text, language).then((translated) => {
-			// Avoid update if language changed during translation.
-			if (languageRef.current === language) {
-				setTranslations((prev) => ({ ...prev, [text]: translated }));
+		async function loadTranslationFile() {
+			try {
+				const translationData = await fetch(`/lang/${currentLanguage}/common.json`).then(res => res.json());
+				i18n.addResources(currentLanguage, "translation", translationData);
+				i18n.changeLanguage(currentLanguage);
+			} catch (error) {
+				console.error("Error loading translations: ", error);
 			}
-		});
-		// Meanwhile show original text
-		return text;
-	}, [language, translations]);
+		}
+		loadTranslationFile();
+	}, [currentLanguage]);
+	// Load saved language
+	useEffect(() => {
+		const savedLanguage = localStorage.getItem("language") as SupportedLanguage | null;
+		if (savedLanguage === "en" || savedLanguage === "es") setCurrentLanguage(savedLanguage);
+	}, []);
+	const changeLanguage = (newLanguage: SupportedLanguage) => {
+		setCurrentLanguage(newLanguage);
+		localStorage.setItem("language", newLanguage);
+	};
 	return (
-		<LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage, t }}>
+		<LanguageContext.Provider value={{currentLanguage, changeLanguage, t}}>
 			{children}
 		</LanguageContext.Provider>
 	);
@@ -54,9 +55,6 @@ export function LanguageProvider({children}: { children: ReactNode }) {
 
 export function useLanguage() {
 	const context = useContext(LanguageContext);
-	if (context === undefined) {
-		throw new Error("useLanguage must be used within a LanguageProvider");
-	}
+	if (!context) throw new Error("useLanguage must be used within LanguageProvider");
 	return context;
 }
-
