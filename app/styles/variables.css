@@ -6,6 +6,7 @@
 	--foreground: #1c1f26; /* primary text color (titles, body text) - near black for high contrast */
 	--primary: #2e51a2; /* main blue color (main action buttons, links, highlights, topbar background) */
 	--secondary: #435b96; /* darker blue for hover states and secondary buttons (slightly desaturated version of primary) */
+	--muted-secondary: #cedbff; /* muted variation of the main blue color for deactivated buttons */
 	--accent: #f78c1d; /* orange accent (ratings, active tags, important highlights, icons, notifications) */
 	--muted: #e3e8f2; /* subtle background for cards, tables, containers, and alternate row colors */
 	--border: #d0d7e5; /* light border color for dividers, tables, or card outlines */
@@ -29,6 +30,7 @@
 		--foreground: #e8ecf5;
 		--primary: #4d7cf3;
 		--secondary: #3b5cc8;
+		--muted-secondary: #253357;
 		--accent: #f8a84b;
 		--muted: #1a1d25;
 		--border: #2a2e3a;

@@ -1,0 +1,16 @@
+# Dependencies
+node_modules
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Next.js build output
+.next
+
+# Environment variables
+.env
+
+# Documentation
+README.md
