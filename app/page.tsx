@@ -43,7 +43,7 @@ export default function LoginPage() {
 	}
 	
 	return (
-		<main className="login-background fixed inset-0 flex flex-col items-center justify-center overflow-hidden">
+		<main className="login-background flex-1 flex items-center justify-center">
 			<div className="login-form">
 				<h1 className="text-2xl font-semibold mb-4 text-[var(--foreground)]">
 					{loginMode ? t("LOGIN") : t("REGISTER")}
