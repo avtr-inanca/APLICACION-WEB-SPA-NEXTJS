@@ -5,6 +5,7 @@
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
+  	min-height: 0;
 }
 
 .login-form {
@@ -16,4 +17,10 @@
 	width: 100%;
 	max-width: 20vw;
 	text-align: center;
+}
+
+@media (max-width: 1200px) {
+	.login-form {
+		max-width: 90vw;
+	}
 }
