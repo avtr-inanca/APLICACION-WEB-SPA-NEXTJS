@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "My Anime Collection",
+	title: "My Anime Log",
 	description: "Manage your personal anime collection",
 };
 
