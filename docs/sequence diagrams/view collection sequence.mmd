@@ -1,0 +1,12 @@
+sequenceDiagram
+    actor user as Usuario
+    participant app as My Anime Log App
+    participant api as API
+    participant supabase as Supabase Database
+    participant auth as Supabase Auth
+    
+    user->>app: navega a su colleccion
+    app->>auth: getAccessToken()
+    auth-->>app: token
+    app->>api: GET /api/collection/
+    api->>supabase: SELECT (database entry id)

@@ -1,0 +1,13 @@
+sequenceDiagram
+    actor user as Usuario
+    participant app as My Anime Log App
+    participant supabase as Supabase Auth Service
+    participant email as Servicio Email
+
+    user->>app: ingresa email y contraseña
+    user->>app: click en "Registrarse"
+    app->>supabase: signUp(email, contraseña)
+    supabase->>email: envio mail de validacion
+    Note right of user: Validacion de cuenta pendiente
+    user->>email: abre el mail de validacion
+    email->>supabase: valida la cuenta
