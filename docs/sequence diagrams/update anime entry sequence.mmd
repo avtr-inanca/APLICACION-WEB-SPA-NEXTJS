@@ -1,0 +1,13 @@
+sequenceDiagram
+    actor user as Usuario
+    participant app as My Anime Log App
+    participant api as API
+    participant supabase as Supabase Database
+    participant auth as Supabase Auth
+
+    user->>app: edita entrada (status, episodes, rating)
+    user->>app: click en "Save changes"
+    app->>auth: getAccessToken()
+    auth-->>app: token
+    app->>api: PUT /api/collection/:id
+    api->>supabase: UPDATE (database entry id)

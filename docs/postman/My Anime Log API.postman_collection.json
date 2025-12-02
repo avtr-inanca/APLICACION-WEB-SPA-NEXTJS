@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "274f3967-74df-411f-91b5-460a5bb69d06",
+		"name": "My Anime Log API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39417290"
+	},
+	"item": [
+		{
+			"name": "Get full anime collection",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/collection",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"collection"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add anime to collection",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"anime\": {\n        \"mal_id\": 12345,\n        \"title\": \"Anime Title\",\n        \"title_english\": \"Anime Title English\",\n        \"title_japanese\": \"アニメタイトル\",\n        \"episodes\": 12,\n        \"score\": 8.5,\n        \"synopsis\": \"Description of the anime...\",\n        \"images\": {\n            \"jpg\": {\n                \"image_url\": \"https://cdn.myanimelist.net/images/anime/1887/92364.jpg\",\n                \"large_image_url\": \"https://cdn.myanimelist.net/images/anime/1887/92364l.jpg\",\n                \"small_image_url\": \"https://cdn.myanimelist.net/images/anime/1887/92364t.jpg\"\n            },\n            \"webp\": {\n                \"image_url\": \"https://cdn.myanimelist.net/images/anime/1887/92364.webp\",\n                \"large_image_url\": \"https://cdn.myanimelist.net/images/anime/1887/92364l.webp\",\n                \"small_image_url\": \"https://cdn.myanimelist.net/images/anime/1887/92364t.webp\"\n            }\n        },\n        \"type\": \"TV\",\n        \"status\": \"Finished Airing\",\n        \"airing\": false,\n        \"genres\": [\n            {\n                \"mal_id\": 1,\n                \"type\": \"anime\",\n                \"name\": \"Action\",\n                \"url\": \"https://myanimelist.net/anime/genre/1/Action\"\n            }\n        ],\n        \"studios\": [\n            {\n                \"mal_id\": 1,\n                \"type\": \"anime\",\n                \"name\": \"Studio Name\",\n                \"url\": \"https://myanimelist.net/anime/producer/1/Studio_Name\"\n            }\n        ]\n    },\n    \"status\": \"plan_to_watch\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/collection",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"collection"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add Naruto to collection",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"anime\": {\n        \"mal_id\": 20,\n        \"url\": \"https://myanimelist.net/anime/20/Naruto\",\n        \"images\": {\n            \"jpg\": {\n                \"image_url\": \"https://cdn.myanimelist.net/images/anime/1141/142503.jpg\",\n                \"small_image_url\": \"https://cdn.myanimelist.net/images/anime/1141/142503t.jpg\",\n                \"large_image_url\": \"https://cdn.myanimelist.net/images/anime/1141/142503l.jpg\"\n            },\n            \"webp\": {\n                \"image_url\": \"https://cdn.myanimelist.net/images/anime/1141/142503.webp\",\n                \"small_image_url\": \"https://cdn.myanimelist.net/images/anime/1141/142503t.webp\",\n                \"large_image_url\": \"https://cdn.myanimelist.net/images/anime/1141/142503l.webp\"\n            }\n        },\n        \"trailer\": {\n            \"youtube_id\": null,\n            \"url\": null,\n            \"embed_url\": null,\n            \"images\": {\n                \"image_url\": null,\n                \"small_image_url\": null,\n                \"medium_image_url\": null,\n                \"large_image_url\": null,\n                \"maximum_image_url\": null\n            }\n        },\n        \"approved\": true,\n        \"titles\": [\n            {\n                \"type\": \"Default\",\n                \"title\": \"Naruto\"\n            },\n            {\n                \"type\": \"Synonym\",\n                \"title\": \"NARUTO\"\n            },\n            {\n                \"type\": \"Japanese\",\n                \"title\": \"ナルト\"\n            },\n            {\n                \"type\": \"English\",\n                \"title\": \"Naruto\"\n            }\n        ],\n        \"title\": \"Naruto\",\n        \"title_english\": \"Naruto\",\n        \"title_japanese\": \"ナルト\",\n        \"title_synonyms\": [\n            \"NARUTO\"\n        ],\n        \"type\": \"TV\",\n        \"source\": \"Manga\",\n        \"episodes\": 220,\n        \"status\": \"Finished Airing\",\n        \"airing\": false,\n        \"aired\": {\n            \"from\": \"2002-10-03T00:00:00+00:00\",\n            \"to\": \"2007-02-08T00:00:00+00:00\",\n            \"prop\": {\n                \"from\": {\n                    \"day\": 3,\n                    \"month\": 10,\n                    \"year\": 2002\n                },\n                \"to\": {\n                    \"day\": 8,\n                    \"month\": 2,\n                    \"year\": 2007\n                }\n            },\n            \"string\": \"Oct 3, 2002 to Feb 8, 2007\"\n        },\n        \"duration\": \"23 min per ep\",\n        \"rating\": \"PG-13 - Teens 13 or older\",\n        \"score\": 8.01,\n        \"scored_by\": 2098463,\n        \"rank\": 688,\n        \"popularity\": 9,\n        \"members\": 3050828,\n        \"favorites\": 84803,\n        \"synopsis\": \"Twelve years ago, a colossal demon fox terrorized the world. During the monster's attack on the Hidden Leaf Village, the Hokage—the village's leader and most powerful ninja—sacrifices himself to seal the beast inside a newborn, relieving civilization from destruction while dooming the baby to a lonely life.\\n\\nNow, after years of being shunned and bullied, Naruto Uzumaki pesters the village with elaborate pranks and vandalism. Despite these antics, he works hard to achieve his dream: to become the Hokage and earn the acknowledgement of those who have mistreated him for his entire life. Naruto joins Team 7, a ninja squad made up of two of his peers—prodigy Sasuke Uchiha and clever Sakura Haruno.\\n\\nUnder the aloof Kakashi Hatake's leadership, Team 7 takes on a series of difficult missions, forcing its members to grow in strength and comradery despite their many differences. Naruto strives to stand out in his rivalry with Sasuke and earn the romantic affection of Sakura. But as the trio brush against danger and death, their tragic pasts threaten to tear them apart.\\n\\n[Written by MAL Rewrite]\",\n        \"background\": \"Naruto received numerous awards during its airing, including the Best Full-Length Animation Program Award in the third UStv Awards and the 38th Best Animated Show in IGN's Top 100 Animated Series. The anime was released on DVD in 16 volumes by VIZ Media from July 4, 2006, to September 22, 2009. The company rereleased it in eight volumes from October 6, 2009, to December 14, 2010. VIZ Media also made available a Blu-ray version in eight volumes from November 3, 2020, to October 18, 2022. The series adapts the first 27 volumes of the original manga.\",\n        \"season\": \"fall\",\n        \"year\": 2002,\n        \"broadcast\": {\n            \"day\": \"Thursdays\",\n            \"time\": \"19:30\",\n            \"timezone\": \"Asia/Tokyo\",\n            \"string\": \"Thursdays at 19:30 (JST)\"\n        },\n        \"producers\": [\n            {\n                \"mal_id\": 16,\n                \"type\": \"anime\",\n                \"name\": \"TV Tokyo\",\n                \"url\": \"https://myanimelist.net/anime/producer/16/TV_Tokyo\"\n            },\n            {\n                \"mal_id\": 17,\n                \"type\": \"anime\",\n                \"name\": \"Aniplex\",\n                \"url\": \"https://myanimelist.net/anime/producer/17/Aniplex\"\n            }\n        ],\n        \"licensors\": [\n            {\n                \"mal_id\": 119,\n                \"type\": \"anime\",\n                \"name\": \"VIZ Media\",\n                \"url\": \"https://myanimelist.net/anime/producer/119/VIZ_Media\"\n            }\n        ],\n        \"studios\": [\n            {\n                \"mal_id\": 1,\n                \"type\": \"anime\",\n                \"name\": \"Studio Pierrot\",\n                \"url\": \"https://myanimelist.net/anime/producer/1/Studio_Pierrot\"\n            }\n        ],\n        \"genres\": [\n            {\n                \"mal_id\": 1,\n                \"type\": \"anime\",\n                \"name\": \"Action\",\n                \"url\": \"https://myanimelist.net/anime/genre/1/Action\"\n            },\n            {\n                \"mal_id\": 2,\n                \"type\": \"anime\",\n                \"name\": \"Adventure\",\n                \"url\": \"https://myanimelist.net/anime/genre/2/Adventure\"\n            },\n            {\n                \"mal_id\": 10,\n                \"type\": \"anime\",\n                \"name\": \"Fantasy\",\n                \"url\": \"https://myanimelist.net/anime/genre/10/Fantasy\"\n            }\n        ],\n        \"explicit_genres\": [],\n        \"themes\": [\n            {\n                \"mal_id\": 17,\n                \"type\": \"anime\",\n                \"name\": \"Martial Arts\",\n                \"url\": \"https://myanimelist.net/anime/genre/17/Martial_Arts\"\n            }\n        ],\n        \"demographics\": [\n            {\n                \"mal_id\": 27,\n                \"type\": \"anime\",\n                \"name\": \"Shounen\",\n                \"url\": \"https://myanimelist.net/anime/genre/27/Shounen\"\n            }\n        ]\n    },\n    \"status\": \"plan_to_watch\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/collection",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"collection"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n    \"user_id\": \"123e4567-e89b-12d3-a456-426614174001\",\n    \"anime_id\": 12345,\n    \"anime_data\": {\n        \"mal_id\": 12345,\n        \"title\": \"Anime Title\"\n    },\n    \"status\": \"plan_to_watch\",\n    \"episodes_watched\": 0,\n    \"rating\": null,\n    \"notes\": null,\n    \"created_at\": \"2024-01-01T00:00:00Z\",\n    \"updated_at\": \"2024-01-01T00:00:00Z\"\n}"
+				},
+				{
+					"name": "Add Dragon Ball to collection",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"anime\": {\n        \"mal_id\": 223,\n        \"url\": \"https://myanimelist.net/anime/223/Dragon_Ball\",\n        \"images\": {\n            \"jpg\": {\n                \"image_url\": \"https://cdn.myanimelist.net/images/anime/1887/92364.jpg\",\n                \"small_image_url\": \"https://cdn.myanimelist.net/images/anime/1887/92364t.jpg\",\n                \"large_image_url\": \"https://cdn.myanimelist.net/images/anime/1887/92364l.jpg\"\n            },\n            \"webp\": {\n                \"image_url\": \"https://cdn.myanimelist.net/images/anime/1887/92364.webp\",\n                \"small_image_url\": \"https://cdn.myanimelist.net/images/anime/1887/92364t.webp\",\n                \"large_image_url\": \"https://cdn.myanimelist.net/images/anime/1887/92364l.webp\"\n            }\n        },\n        \"trailer\": {\n            \"youtube_id\": null,\n            \"url\": null,\n            \"embed_url\": \"https://www.youtube-nocookie.com/embed/fg_fP7cRJXg?enablejsapi=1&wmode=opaque&autoplay=1\",\n            \"images\": {\n                \"image_url\": null,\n                \"small_image_url\": null,\n                \"medium_image_url\": null,\n                \"large_image_url\": null,\n                \"maximum_image_url\": null\n            }\n        },\n        \"approved\": true,\n        \"titles\": [\n            {\n                \"type\": \"Default\",\n                \"title\": \"Dragon Ball\"\n            },\n            {\n                \"type\": \"Synonym\",\n                \"title\": \"Dragonball\"\n            },\n            {\n                \"type\": \"Synonym\",\n                \"title\": \"DB\"\n            },\n            {\n                \"type\": \"Japanese\",\n                \"title\": \"ドラゴンボール\"\n            },\n            {\n                \"type\": \"English\",\n                \"title\": \"Dragon Ball\"\n            }\n        ],\n        \"title\": \"Dragon Ball\",\n        \"title_english\": \"Dragon Ball\",\n        \"title_japanese\": \"ドラゴンボール\",\n        \"title_synonyms\": [\n            \"Dragonball\",\n            \"DB\"\n        ],\n        \"type\": \"TV\",\n        \"source\": \"Manga\",\n        \"episodes\": 153,\n        \"status\": \"Finished Airing\",\n        \"airing\": false,\n        \"aired\": {\n            \"from\": \"1986-02-26T00:00:00+00:00\",\n            \"to\": \"1989-04-12T00:00:00+00:00\",\n            \"prop\": {\n                \"from\": {\n                    \"day\": 26,\n                    \"month\": 2,\n                    \"year\": 1986\n                },\n                \"to\": {\n                    \"day\": 12,\n                    \"month\": 4,\n                    \"year\": 1989\n                }\n            },\n            \"string\": \"Feb 26, 1986 to Apr 12, 1989\"\n        },\n        \"duration\": \"24 min per ep\",\n        \"rating\": \"PG-13 - Teens 13 or older\",\n        \"score\": 7.98,\n        \"scored_by\": 712919,\n        \"rank\": 726,\n        \"popularity\": 150,\n        \"members\": 1117388,\n        \"favorites\": 17592,\n        \"synopsis\": \"Gokuu Son is a young boy who lives in the woods all alone—that is, until a girl named Bulma runs into him in her search for a set of magical objects called the \\\"Dragon Balls.\\\" Since the artifacts are said to grant one wish to whoever collects all seven, Bulma hopes to gather them and wish for a perfect boyfriend. Gokuu happens to be in possession of a dragon ball, but unfortunately for Bulma, he refuses to part ways with it, so she makes him a deal: he can tag along on her journey if he lets her borrow the dragon ball's power. With that, the two set off on the journey of a lifetime.\\n\\nThey don't go on the journey alone. On the way, they meet the old Muten-Roshi and wannabe disciple Kuririn, with whom Gokuu trains to become a stronger martial artist for the upcoming World Martial Arts Tournament. However, it's not all fun and games; the ability to make any wish come true is a powerful one, and there are others who would do much worse than just wishing for a boyfriend. To stop those who would try to abuse the legendary power, they train to become stronger fighters, using their newfound strength to help the people around them along the way.\\n\\n[Written by MAL Rewrite]\",\n        \"background\": \"Adapts the first 194 chapters of Akira Toriyama’s Dragon Ball manga.\",\n        \"season\": \"winter\",\n        \"year\": 1986,\n        \"broadcast\": {\n            \"day\": \"Wednesdays\",\n            \"time\": \"19:00\",\n            \"timezone\": \"Asia/Tokyo\",\n            \"string\": \"Wednesdays at 19:00 (JST)\"\n        },\n        \"producers\": [\n            {\n                \"mal_id\": 169,\n                \"type\": \"anime\",\n                \"name\": \"Fuji TV\",\n                \"url\": \"https://myanimelist.net/anime/producer/169/Fuji_TV\"\n            }\n        ],\n        \"licensors\": [\n            {\n                \"mal_id\": 102,\n                \"type\": \"anime\",\n                \"name\": \"Funimation\",\n                \"url\": \"https://myanimelist.net/anime/producer/102/Funimation\"\n            }\n        ],\n        \"studios\": [\n            {\n                \"mal_id\": 18,\n                \"type\": \"anime\",\n                \"name\": \"Toei Animation\",\n                \"url\": \"https://myanimelist.net/anime/producer/18/Toei_Animation\"\n            }\n        ],\n        \"genres\": [\n            {\n                \"mal_id\": 1,\n                \"type\": \"anime\",\n                \"name\": \"Action\",\n                \"url\": \"https://myanimelist.net/anime/genre/1/Action\"\n            },\n            {\n                \"mal_id\": 2,\n                \"type\": \"anime\",\n                \"name\": \"Adventure\",\n                \"url\": \"https://myanimelist.net/anime/genre/2/Adventure\"\n            },\n            {\n                \"mal_id\": 4,\n                \"type\": \"anime\",\n                \"name\": \"Comedy\",\n                \"url\": \"https://myanimelist.net/anime/genre/4/Comedy\"\n            },\n            {\n                \"mal_id\": 10,\n                \"type\": \"anime\",\n                \"name\": \"Fantasy\",\n                \"url\": \"https://myanimelist.net/anime/genre/10/Fantasy\"\n            }\n        ],\n        \"explicit_genres\": [],\n        \"themes\": [\n            {\n                \"mal_id\": 17,\n                \"type\": \"anime\",\n                \"name\": \"Martial Arts\",\n                \"url\": \"https://myanimelist.net/anime/genre/17/Martial_Arts\"\n            }\n        ],\n        \"demographics\": [\n            {\n                \"mal_id\": 27,\n                \"type\": \"anime\",\n                \"name\": \"Shounen\",\n                \"url\": \"https://myanimelist.net/anime/genre/27/Shounen\"\n            }\n        ]\n    },\n    \"status\": \"plan_to_watch\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/collection",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"collection"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Update anime entry",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"episodes_watched\": 10,\n    \"status\": \"watching\",\n    \"rating\": 8,\n    \"notes\": \"Muy bueno, lo recomiendo.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/collection/:id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"collection",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "caa02811-ceb2-4642-bb68-285194d0197d",
+							"description": "ID of item in collection"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove anime entry",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/collection/:id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"collection",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "b70e8209-c54e-43d5-8376-4dd545970d1d",
+							"description": "ID of item in collection"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000"
+		}
+	]
+}

@@ -1,0 +1,12 @@
+sequenceDiagram
+    actor user as Usuario
+    participant app as My Anime Log App
+    participant api as API
+    participant supabase as Supabase Database
+    participant auth as Supabase Auth
+
+    user->>app: click en "Remove"
+    app->>auth: getAccessToken()
+    auth-->>app: token
+    app->>api: DELETE /api/collection/:id
+    api->>supabase: DELETE (database entry id)

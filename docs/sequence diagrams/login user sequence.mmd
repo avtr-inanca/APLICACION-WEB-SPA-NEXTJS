@@ -1,0 +1,10 @@
+sequenceDiagram
+    actor user as Usuario
+    participant app as My Anime Log App
+    participant supabase as Supabase Auth Service
+
+    user->>app: ingresa email y contraseña
+    user->>app: click en "Login"
+    app->>supabase: signInWithPassword(email, contraseña)
+    supabase->>app: sesion del usuario y JWT token
+    app->>user: redirect al homepage

@@ -1,0 +1,63 @@
+{
+	"info": {
+		"_postman_id": "74f96666-4c5d-4e66-9b22-80ec2eda23fe",
+		"name": "Jikan API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39417290"
+	},
+	"item": [
+		{
+			"name": "Search anime",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/anime?q={{search_query}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"anime"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{search_query}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": ""
+		}
+	]
+}
