@@ -1,0 +1,10 @@
+sequenceDiagram
+    actor user as Usuario
+    participant app as My Anime Log App
+    participant jikan as Jikan API
+
+    user->>app: ingresa nombre del anime
+    user->>app: click en "Search"
+    app->>jikan: GET api.jikan.moe/anime?q={query}
+    jikan-->>app: JikanAnimeData[] 
+    app-->>user: mostrar animes encontrados
