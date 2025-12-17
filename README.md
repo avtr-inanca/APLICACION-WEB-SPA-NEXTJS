@@ -23,6 +23,16 @@ All project documentation is stored under the `docs` directory, including:
 - **Sequence diagrams**: End‑to‑end flows for several use cases.
 - **Postman collections**: Ready‑to‑use collections for testing with Postman.
 
+![architecture diagram](/docs/architecture%20diagram/Architecture%20diagram.png). 
+![db diagram](/docs/db/db%20diagram.png). 
+![sequence diagram 1](/docs/sequence%20diagrams/add%20anime%20to%20collection%20sequence.png). 
+![sequence diagram 2](/docs/sequence%20diagrams/delete%20anime%20entry%20sequence.png). 
+![sequence diagram 3](/docs/sequence%20diagrams/login%20user%20sequence.png). 
+![sequence diagram 4](/docs/sequence%20diagrams/register%20user%20sequence.png). 
+![sequence diagram 5](/docs/sequence%20diagrams/search%20anime%20sequence.png). 
+![sequence diagram 6](/docs/sequence%20diagrams/update%20anime%20entry%20sequence.png). 
+![sequence diagram 7](/docs/sequence%20diagrams/view%20collection%20sequence.png). 
+
 # How to run the project
 
 ## Setup Requirements
